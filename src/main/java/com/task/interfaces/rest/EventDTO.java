@@ -4,64 +4,49 @@ import java.time.LocalDateTime;
 
 public class EventDTO {
 
-    private String id;
+    private final String id;
 
-    private String title;
+    private final String title;
 
-    private String place;
+    private final String place;
 
-    private String speaker;
+    private final String speaker;
 
-    private String eventType;
+    private final String eventType;
 
-    private LocalDateTime dateTime;
+    private final LocalDateTime dateTime;
+
+    public EventDTO(String id, String title, String place, String speaker, String eventType, LocalDateTime dateTime) {
+        this.id = id;
+        this.title = title;
+        this.place = place;
+        this.speaker = speaker;
+        this.eventType = eventType;
+        this.dateTime = dateTime;
+    }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(final String id) {
-        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(final String title) {
-        this.title = title;
-    }
-
     public String getPlace() {
         return place;
-    }
-
-    public void setPlace(final String place) {
-        this.place = place;
     }
 
     public String getSpeaker() {
         return speaker;
     }
 
-    public void setSpeaker(final String speaker) {
-        this.speaker = speaker;
-    }
-
     public String getEventType() {
         return eventType;
     }
 
-    public void setEventType(final String eventType) {
-        this.eventType = eventType;
-    }
-
     public LocalDateTime getDateTime() {
         return dateTime;
-    }
-
-    public void setDateTime(final LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
 }

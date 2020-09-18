@@ -2,6 +2,11 @@ package com.task.interfaces.rest;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 public class BaseEventCommand {
 
     private String title;
@@ -12,15 +17,15 @@ public class BaseEventCommand {
 
     private String eventType;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dateTime;
-
-
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(final String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -28,7 +33,7 @@ public class BaseEventCommand {
         return place;
     }
 
-    public void setPlace(final String place) {
+    public void setPlace(String place) {
         this.place = place;
     }
 
@@ -36,7 +41,7 @@ public class BaseEventCommand {
         return speaker;
     }
 
-    public void setSpeaker(final String speaker) {
+    public void setSpeaker(String speaker) {
         this.speaker = speaker;
     }
 
@@ -44,7 +49,7 @@ public class BaseEventCommand {
         return eventType;
     }
 
-    public void setEventType(final String eventType) {
+    public void setEventType(String eventType) {
         this.eventType = eventType;
     }
 
@@ -52,7 +57,8 @@ public class BaseEventCommand {
         return dateTime;
     }
 
-    public void setDateTime(final LocalDateTime dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
+    
 }

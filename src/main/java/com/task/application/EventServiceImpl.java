@@ -38,17 +38,20 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getEvent(String eventId) {
-        return eventRepository.findById(eventId).orElseThrow(EntityNotFoundException::new);
+        return eventRepository.findById(eventId)
+                                .orElseThrow(EntityNotFoundException::new);
     }
 
+    // TODO: handle data not found using optional
     @Override
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }
 
+    // TODO: handle data not found using optional
     @Override
     public List<Event> getAllEventsByTitle(String title) {
-        return null;
+        return eventRepository.findByTitle(title);
     }
 
 }

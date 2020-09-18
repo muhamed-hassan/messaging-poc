@@ -8,8 +8,8 @@ import com.task.application.EventConsumer;
 import com.task.domain.EventRepository;
 import com.task.interfaces.rest.EventCreationCommand;
 import com.task.interfaces.rest.EventUpdateCommand;
-@Component
-@Profile("kafka")
+//@Component
+//@Profile("kafka")
 public class EventConsumerFromKafka implements EventConsumer {
 
     private EventRepository eventRepository;
@@ -18,20 +18,20 @@ public class EventConsumerFromKafka implements EventConsumer {
         this.eventRepository = eventRepository;
     }
 
-    @KafkaListener
-    @Override
+//    @KafkaListener
+//    @Override
     public void onCreateEvent(EventCreationCommand event) {
         
     }
 
-    @KafkaListener
-    @Override
+//    @KafkaListener
+//    @Override
     public void onUpdateEvent(EventUpdateCommand event) {
 
     }
 
-    @KafkaListener
-    @Override
+//    @KafkaListener
+//    @Override
     public void onDeleteEvent(String eventId) {
 
     }
