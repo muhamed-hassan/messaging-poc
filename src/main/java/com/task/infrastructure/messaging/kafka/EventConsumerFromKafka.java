@@ -3,36 +3,46 @@ package com.task.infrastructure.messaging.kafka;
 import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.task.application.EventConsumer;
 import com.task.domain.EventRepository;
+import com.task.infrastructure.messaging.EventEntityAssembler;
 import com.task.interfaces.rest.EventCreationCommand;
 import com.task.interfaces.rest.EventUpdateCommand;
-//@Component
-//@Profile("kafka")
+
+@Component
+@Profile("kafka")
 public class EventConsumerFromKafka implements EventConsumer {
 
     private EventRepository eventRepository;
 
-    public EventConsumerFromKafka(EventRepository eventRepository) {
+    private EventEntityAssembler eventEntityAssembler;
+
+    public EventConsumerFromKafka(EventRepository eventRepository, EventEntityAssembler eventEntityAssembler) {
         this.eventRepository = eventRepository;
+        this.eventEntityAssembler = eventEntityAssembler;
     }
 
-//    @KafkaListener
-//    @Override
-    public void onCreateEvent(EventCreationCommand event) {
-        
+    @KafkaListener(topics = "${queues.events_to_be_created}", groupId = "${mgmt_group.events_to_be_created}")
+    @Transactional
+    @Override
+    public void onCreateEvent(EventCreationCommand eventCreationCommand) {
+        eventRepository.save(eventEntityAssembler.toEntity(eventCreationCommand));
     }
 
-//    @KafkaListener
-//    @Override
-    public void onUpdateEvent(EventUpdateCommand event) {
-
+    @KafkaListener(topics = "${queues.events_to_be_updated}", groupId = "${mgmt_group.events_to_be_updated}")
+    @Transactional
+    @Override
+    public void onUpdateEvent(EventUpdateCommand eventUpdateCommand) {
+        eventRepository.save(eventEntityAssembler.toEntity(eventUpdateCommand));
     }
 
-//    @KafkaListener
-//    @Override
+    @KafkaListener(topics = "${queues.events_to_be_deleted}", groupId = "${mgmt_group.events_to_be_deleted}")
+    @Transactional
+    @Override
     public void onDeleteEvent(String eventId) {
-
+        eventRepository.deleteById(eventId);
     }
+
 }

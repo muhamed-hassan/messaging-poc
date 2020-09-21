@@ -21,21 +21,21 @@
   "policies": [],
   "queues": [
     {
-      "name": "events_to_be_created.queue",
+      "name": "events_to_be_created",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
-      "name": "events_to_be_updated.queue",
+      "name": "events_to_be_updated",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
-      "name": "events_to_be_deleted.queue",
+      "name": "events_to_be_deleted",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
