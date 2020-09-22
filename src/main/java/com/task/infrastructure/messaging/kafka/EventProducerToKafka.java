@@ -15,14 +15,14 @@ public class EventProducerToKafka implements EventProducer {
 
     private KafkaTemplate<String, Object> kafkaTemplate;
 
-    @Value("${queues.events_to_be_created}")
-    private String creatingQueue;
+    @Value("${events_to_be_created}")
+    private String creatingTopic;
 
-    @Value("${queues.events_to_be_updated}")
-    private String updatingQueue;
+    @Value("${events_to_be_updated}")
+    private String updatingTopic;
 
-    @Value("${queues.events_to_be_deleted}")
-    private String deletingQueue;
+    @Value("${events_to_be_deleted}")
+    private String deletingTopic;
 
     public EventProducerToKafka(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
@@ -30,17 +30,17 @@ public class EventProducerToKafka implements EventProducer {
 
     @Override
     public void emitCreateEvent(EventCreationCommand eventCreationCommand) {
-        kafkaTemplate.send(creatingQueue, eventCreationCommand);
+        kafkaTemplate.send(creatingTopic, eventCreationCommand);
     }
 
     @Override
     public void emitUpdateEvent(EventUpdateCommand eventUpdateCommand) {
-        kafkaTemplate.send(updatingQueue, eventUpdateCommand);
+        kafkaTemplate.send(updatingTopic, eventUpdateCommand);
     }
 
     @Override
     public void emitDeleteEvent(String eventId) {
-        kafkaTemplate.send(deletingQueue, eventId);
+        kafkaTemplate.send(deletingTopic, eventId);
     }
 
 }

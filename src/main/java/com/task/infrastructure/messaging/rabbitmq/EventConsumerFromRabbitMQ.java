@@ -24,21 +24,21 @@ public class EventConsumerFromRabbitMQ implements EventConsumer {
         this.eventEntityAssembler = eventEntityAssembler;
     }
 
-    @RabbitListener(queues = "${queues.events_to_be_created}")
+    @RabbitListener(queues = "${events_to_be_created}")
     @Transactional
     @Override
     public void onCreateEvent(EventCreationCommand eventCreationCommand) {
         eventRepository.save(eventEntityAssembler.toEntity(eventCreationCommand));
     }
 
-    @RabbitListener(queues = "${queues.events_to_be_updated}")
+    @RabbitListener(queues = "${events_to_be_updated}")
     @Transactional
     @Override
     public void onUpdateEvent(EventUpdateCommand eventUpdateCommand) {
         eventRepository.save(eventEntityAssembler.toEntity(eventUpdateCommand));
     }
 
-    @RabbitListener(queues = "${queues.events_to_be_deleted}")
+    @RabbitListener(queues = "${events_to_be_deleted}")
     @Transactional
     @Override
     public void onDeleteEvent(String eventId) {

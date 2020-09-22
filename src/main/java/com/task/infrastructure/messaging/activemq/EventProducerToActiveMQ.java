@@ -15,13 +15,13 @@ public class EventProducerToActiveMQ implements EventProducer {
 
     private JmsTemplate jmsTemplate;
 
-    @Value("${queues.events_to_be_created}")
+    @Value("${events_to_be_created}")
     private String creatingQueue;
 
-    @Value("${queues.events_to_be_updated}")
+    @Value("${events_to_be_updated}")
     private String updatingQueue;
 
-    @Value("${queues.events_to_be_deleted}")
+    @Value("${events_to_be_deleted}")
     private String deletingQueue;
 
     public EventProducerToActiveMQ(JmsTemplate jmsTemplate) {

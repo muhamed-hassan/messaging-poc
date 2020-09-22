@@ -16,8 +16,8 @@ public class ErrorLoggerAspect {
     @AfterThrowing(pointcut = "within(com.task.application.*) || within(com.task.infrastructure.messaging.*)", throwing= "exception")
     public void logExceptionMessage(JoinPoint joinPoint, Exception exception) {
         LOGGER.error(">> Error occurred in {}, with message: {}",
-            joinPoint.getSignature().toLongString(),
-            exception.getMessage() == null ? "Internal error" : exception.getMessage());
+                        joinPoint.getSignature().toLongString(),
+                        exception.getMessage() == null ? "Internal error" : exception.getMessage());
     }
 
 }

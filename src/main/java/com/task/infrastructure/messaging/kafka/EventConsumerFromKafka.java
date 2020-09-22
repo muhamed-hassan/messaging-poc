@@ -24,21 +24,21 @@ public class EventConsumerFromKafka implements EventConsumer {
         this.eventEntityAssembler = eventEntityAssembler;
     }
 
-    @KafkaListener(topics = "${queues.events_to_be_created}", groupId = "${mgmt_group.events_to_be_created}")
+    @KafkaListener(topics = "${events_to_be_created}", groupId = "${mgmt_group.events_to_be_created}")
     @Transactional
     @Override
     public void onCreateEvent(EventCreationCommand eventCreationCommand) {
         eventRepository.save(eventEntityAssembler.toEntity(eventCreationCommand));
     }
 
-    @KafkaListener(topics = "${queues.events_to_be_updated}", groupId = "${mgmt_group.events_to_be_updated}")
+    @KafkaListener(topics = "${events_to_be_updated}", groupId = "${mgmt_group.events_to_be_updated}")
     @Transactional
     @Override
     public void onUpdateEvent(EventUpdateCommand eventUpdateCommand) {
         eventRepository.save(eventEntityAssembler.toEntity(eventUpdateCommand));
     }
 
-    @KafkaListener(topics = "${queues.events_to_be_deleted}", groupId = "${mgmt_group.events_to_be_deleted}")
+    @KafkaListener(topics = "${events_to_be_deleted}", groupId = "${mgmt_group.events_to_be_deleted}")
     @Transactional
     @Override
     public void onDeleteEvent(String eventId) {
