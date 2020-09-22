@@ -35,13 +35,13 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createEvent(@Valid @RequestBody EventCreationCommand eventCreationCommand) {
+    public ResponseEntity<Void> createEvent(@RequestBody @Valid @NotNull EventCreationCommand eventCreationCommand) {
         eventService.createEvent(eventCreationCommand);
         return ResponseEntity.accepted().build();
     }
 
     @PatchMapping
-    public ResponseEntity<Void> updateEvent(@Valid @RequestBody EventUpdateCommand eventUpdateCommand) {
+    public ResponseEntity<Void> updateEvent(@RequestBody @Valid @NotNull EventUpdateCommand eventUpdateCommand) {
         eventService.updateEvent(eventUpdateCommand);
         return ResponseEntity.accepted().build();
     }
@@ -66,7 +66,7 @@ public class EventController {
     }
 
     @GetMapping(params = "title")
-    public ResponseEntity<List<EventDTO>> getAllEventsByTitle(@RequestParam String title) {
+    public ResponseEntity<List<EventDTO>> getAllEventsByTitle(@RequestParam @NotNull String title) {
         return ResponseEntity.ok(eventService.getAllEventsByTitle(title)
                                                 .stream()
                                                 .map(eventDtoAssembler::toDto)
