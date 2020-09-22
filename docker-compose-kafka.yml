@@ -2,13 +2,13 @@ version: "3"
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper
-    container_name: zookeeper
+    #container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
 
   custom-kafka-broker:
     image: confluentinc/cp-kafka
-    container_name: kafka-broker
+    #container_name: kafka-broker
     ports:
       - "9092:9092"
     environment:
@@ -22,3 +22,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
+
+networks:
+  default:
+    external:
+      name: messaging-poc-network      
+   
