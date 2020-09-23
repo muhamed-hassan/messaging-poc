@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.task.application.EventService;
 
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -38,6 +39,7 @@ public class EventController {
         this.eventDtoAssembler = eventDtoAssembler;
     }
 
+    @ApiOperation("createEvent")
     @ApiResponses(value = {
         @ApiResponse(code = HttpURLConnection.HTTP_ACCEPTED, message = "Succeeded in publishing new event for creation"),
         @ApiResponse(code = HttpURLConnection.HTTP_BAD_REQUEST, message = "Invalid payload"),
@@ -49,6 +51,7 @@ public class EventController {
         return ResponseEntity.accepted().build();
     }
 
+    @ApiOperation("updateEvent")
     @ApiResponses(value = {
         @ApiResponse(code = HttpURLConnection.HTTP_ACCEPTED, message = "Succeeded in publishing a modified event to be updated"),
         @ApiResponse(code = HttpURLConnection.HTTP_BAD_REQUEST, message = "Invalid payload"),
@@ -60,6 +63,7 @@ public class EventController {
         return ResponseEntity.accepted().build();
     }
 
+    @ApiOperation("deleteEvent")
     @ApiResponses(value = {
         @ApiResponse(code = HttpURLConnection.HTTP_ACCEPTED, message = "Succeeded in publishing an event id for deletion"),
         @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal server error")
@@ -70,6 +74,7 @@ public class EventController {
         return ResponseEntity.accepted().build();
     }
 
+    @ApiOperation("getEvent")
     @ApiResponses(value = {
         @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "Succeeded in fetching an event"),
         @ApiResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = "Data not found"),
@@ -80,6 +85,7 @@ public class EventController {
         return ResponseEntity.ok(eventDtoAssembler.toDto(eventService.getEvent(eventId)));
     }
 
+    @ApiOperation("getAllEvents")
     @ApiResponses(value = {
         @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "Succeeded in fetching events"),
         @ApiResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = "Data not found"),
@@ -93,6 +99,7 @@ public class EventController {
                                                 .collect(Collectors.toList()));
     }
 
+    @ApiOperation("getAllEventsByTitle")
     @ApiResponses(value = {
         @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "Succeeded in fetching events"),
         @ApiResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = "Data not found"),
