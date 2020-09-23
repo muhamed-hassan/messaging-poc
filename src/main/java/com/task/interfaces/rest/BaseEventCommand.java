@@ -2,6 +2,9 @@ package com.task.interfaces.rest;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -9,14 +12,19 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class BaseEventCommand {
 
+    @NotNull @NotBlank
     private String title;
 
+    @NotNull @NotBlank
     private String place;
 
+    @NotNull @NotBlank
     private String speaker;
 
+    @NotNull @NotBlank
     private String eventType;
 
+    @NotNull
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dateTime;
