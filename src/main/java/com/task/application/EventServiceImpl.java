@@ -44,7 +44,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getAllEvents() {
-        List<Event> events = eventRepository.findAll();
+        var events = eventRepository.findAll();
         if (events.isEmpty()) {
             throw new NoResultException();
         }
@@ -53,7 +53,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getAllEventsByTitle(String title) {
-        List<Event> events = eventRepository.findByTitle(title);
+        var events = eventRepository.findByTitle(title);
         if (events.isEmpty()) {
             throw new NoResultException();
         }

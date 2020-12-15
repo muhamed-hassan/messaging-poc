@@ -10,7 +10,7 @@ import com.task.interfaces.rest.EventUpdateCommand;
 public class EventEntityAssembler {
 
     public Event toEntity(EventCreationCommand eventCreationCommand) {
-        Event event = new Event();
+        var event = new Event();
         event.setTitle(eventCreationCommand.getTitle());
         event.setPlace(eventCreationCommand.getPlace());
         event.setSpeaker(eventCreationCommand.getSpeaker());
@@ -20,7 +20,7 @@ public class EventEntityAssembler {
     }
 
     public Event toEntity(EventUpdateCommand eventUpdateCommand) {
-        Event event = new Event();
+        var event = new Event();
         event.setId(eventUpdateCommand.getId());
         event.setTitle(eventUpdateCommand.getTitle());
         event.setPlace(eventUpdateCommand.getPlace());

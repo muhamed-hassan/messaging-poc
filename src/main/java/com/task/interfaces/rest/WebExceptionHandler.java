@@ -24,35 +24,38 @@ public class WebExceptionHandler {
     @ExceptionHandler(value = { EntityNotFoundException.class, NoResultException.class })
     public ResponseEntity<Map<String, String>> handleNoResultException(RuntimeException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                .body(Map.of(ERROR_KEY, exception.getMessage()));
+                             .body(Map.of(ERROR_KEY, exception.getMessage()));
     }
 
     @ExceptionHandler
     public ResponseEntity<Map<String, String>> handleConstraintViolationException(ConstraintViolationException exception) {
-        String message = exception.getConstraintViolations()
-                                    .stream()
-                                    .map(ConstraintViolation::getMessage)
-                                    .collect(Collectors.joining(", "));
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                                .body(Map.of(ERROR_KEY, message));
+        var message = exception.getConstraintViolations()
+                                       .stream()
+                                       .map(ConstraintViolation::getMessage)
+                                       .collect(Collectors.joining(", "));
+        return responseFrom(HttpStatus.BAD_REQUEST, message);
     }
 
     @ExceptionHandler
     public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        String message = exception.getBindingResult()
-                                    .getAllErrors()
-                                    .stream()
-                                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                                    .collect(Collectors.joining(", "));
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                                .body(Map.of(ERROR_KEY, message));
+        var message = exception.getBindingResult()
+                                       .getAllErrors()
+                                       .stream()
+                                       .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                                       .collect(Collectors.joining(", "));
+        return responseFrom(HttpStatus.BAD_REQUEST, message);
     }
+
 
     @ExceptionHandler
     public ResponseEntity<Map<String, String>> handleGeneralException(Exception exception) {
-        String message = exception.getMessage() == null ? "Unable to process this request." : exception.getMessage();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                .body(Map.of(ERROR_KEY, message));
+        var message = exception.getMessage() == null ? "Unable to process this request." : exception.getMessage();
+        return responseFrom(HttpStatus.INTERNAL_SERVER_ERROR, message);
+    }
+
+    private ResponseEntity<Map<String, String>> responseFrom(HttpStatus httpStatus, String message) {
+        return ResponseEntity.status(httpStatus)
+                             .body(Map.of(ERROR_KEY, message));
     }
 
 }
