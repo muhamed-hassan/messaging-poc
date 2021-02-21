@@ -17,9 +17,9 @@ import reactor.core.scheduler.Schedulers;
 @Profile("kafka")
 public class EventConsumerFromKafka implements EventConsumer {
 
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    private EventEntityAssembler eventEntityAssembler;
+    private final EventEntityAssembler eventEntityAssembler;
 
     public EventConsumerFromKafka(EventRepository eventRepository, EventEntityAssembler eventEntityAssembler) {
         this.eventRepository = eventRepository;

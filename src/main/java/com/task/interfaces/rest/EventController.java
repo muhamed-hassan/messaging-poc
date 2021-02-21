@@ -4,7 +4,6 @@ import java.net.HttpURLConnection;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -30,9 +29,9 @@ import reactor.core.publisher.Mono;
 @Validated
 public class EventController {
 
-    private EventService eventService;
+    private final EventService eventService;
 
-    private EventDtoAssembler eventDtoAssembler;
+    private final EventDtoAssembler eventDtoAssembler;
 
     public EventController(EventService eventService, EventDtoAssembler eventDtoAssembler) {
         this.eventService = eventService;
@@ -45,7 +44,7 @@ public class EventController {
         @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal server error")
     })
     @PostMapping
-    public ResponseEntity<Void> createEvent(@RequestBody @Valid @NotNull EventCreationCommand eventCreationCommand) {
+    public ResponseEntity<Void> createEvent(@RequestBody @Valid EventCreationCommand eventCreationCommand) {
         eventService.createEvent(eventCreationCommand);
         return ResponseEntity.accepted().build();
     }
@@ -56,7 +55,7 @@ public class EventController {
         @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal server error")
     })
     @PatchMapping
-    public ResponseEntity<Void> updateEvent(@RequestBody @Valid @NotNull EventUpdateCommand eventUpdateCommand) {
+    public ResponseEntity<Void> updateEvent(@RequestBody @Valid EventUpdateCommand eventUpdateCommand) {
         eventService.updateEvent(eventUpdateCommand);
         return ResponseEntity.accepted().build();
     }
@@ -66,7 +65,7 @@ public class EventController {
         @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal server error")
     })
     @DeleteMapping("{eventId}")
-    public ResponseEntity<Void> deleteEvent(@PathVariable @NotBlank String eventId) {
+    public ResponseEntity<Void> deleteEvent(@PathVariable @NotBlank(message = "event id is required") String eventId) {
         eventService.deleteEvent(eventId);
         return ResponseEntity.accepted().build();
     }
@@ -77,7 +76,7 @@ public class EventController {
         @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal server error")
     })
     @GetMapping("{eventId}")
-    public ResponseEntity<Mono<EventDTO>> getEvent(@PathVariable @NotBlank String eventId) {
+    public ResponseEntity<Mono<EventDTO>> getEvent(@PathVariable @NotBlank(message = "event id is required") String eventId) {
         return ResponseEntity.ok(eventService.getEvent(eventId).map(eventDtoAssembler::toDto));
     }
 
@@ -97,7 +96,7 @@ public class EventController {
         @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal server error")
     })
     @GetMapping(params = "title")
-    public ResponseEntity<Flux<EventDTO>> getAllEventsByTitle(@RequestParam @NotBlank String title) {
+    public ResponseEntity<Flux<EventDTO>> getAllEventsByTitle(@RequestParam @NotBlank(message = "title is required") String title) {
         return ResponseEntity.ok(eventService.getAllEventsByTitle(title).map(eventDtoAssembler::toDto));
     }
 

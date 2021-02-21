@@ -16,13 +16,13 @@ public class EventDTO {
 
     private final LocalDateTime dateTime;
 
-    public EventDTO(String id, String title, String place, String speaker, String eventType, LocalDateTime dateTime) {
-        this.id = id;
-        this.title = title;
-        this.place = place;
-        this.speaker = speaker;
-        this.eventType = eventType;
-        this.dateTime = dateTime;
+    private EventDTO(Builder builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+        this.place = builder.place;
+        this.speaker = builder.speaker;
+        this.eventType = builder.eventType;
+        this.dateTime = builder.dateTime;
     }
 
     public String getId() {
@@ -47,6 +47,56 @@ public class EventDTO {
 
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public static class Builder {
+
+        private String id;
+
+        private String title;
+
+        private String place;
+
+        private String speaker;
+
+        private String eventType;
+
+        private LocalDateTime dateTime;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder place(String place) {
+            this.place = place;
+            return this;
+        }
+
+        public Builder speaker(String speaker) {
+            this.speaker = speaker;
+            return this;
+        }
+        
+        public Builder eventType(String eventType) {
+            this.eventType = eventType;
+            return this;
+        }
+
+        public Builder dateTime(LocalDateTime dateTime) {
+            this.dateTime = dateTime;
+            return this;
+        }
+        
+        public EventDTO build() {
+            return new EventDTO(this);
+        }
+        
     }
 
 }

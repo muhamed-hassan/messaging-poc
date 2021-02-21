@@ -17,9 +17,9 @@ import reactor.core.scheduler.Schedulers;
 @Profile("rabbitmq")
 public class EventConsumerFromRabbitMQ implements EventConsumer {
 
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    private EventEntityAssembler eventEntityAssembler;
+    private final EventEntityAssembler eventEntityAssembler;
 
     public EventConsumerFromRabbitMQ(EventRepository eventRepository, EventEntityAssembler eventEntityAssembler) {
         this.eventRepository = eventRepository;

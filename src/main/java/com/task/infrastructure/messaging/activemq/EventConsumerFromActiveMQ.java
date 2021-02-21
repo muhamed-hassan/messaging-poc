@@ -16,9 +16,9 @@ import reactor.core.scheduler.Schedulers;
 @Profile("activemq")
 public class EventConsumerFromActiveMQ implements EventConsumer {
 
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    private EventEntityAssembler eventEntityAssembler;
+    private final EventEntityAssembler eventEntityAssembler;
 
     public EventConsumerFromActiveMQ(EventRepository eventRepository, EventEntityAssembler eventEntityAssembler) {
         this.eventRepository = eventRepository;

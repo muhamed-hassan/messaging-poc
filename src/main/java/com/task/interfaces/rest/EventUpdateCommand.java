@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class EventUpdateCommand extends BaseEventCommand {
 
-    @NotBlank
+    @NotBlank(message = "id is required")
     private String id;
 
     public EventUpdateCommand() {}

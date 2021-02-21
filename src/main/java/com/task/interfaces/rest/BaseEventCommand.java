@@ -12,19 +12,19 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class BaseEventCommand {
 
-    @NotBlank
+    @NotBlank(message = "title is required")
     private String title;
 
-    @NotBlank
+    @NotBlank(message = "place is required")
     private String place;
 
-    @NotBlank
+    @NotBlank(message = "speaker is required")
     private String speaker;
 
-    @NotBlank
+    @NotBlank(message = "eventType is required")
     private String eventType;
 
-    @NotNull
+    @NotNull(message = "dateTime is required")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime dateTime;

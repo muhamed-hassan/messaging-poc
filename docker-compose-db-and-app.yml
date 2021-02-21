@@ -13,8 +13,9 @@ services:
     build: 
       context: .
     ports:
-      - "8080:8080"  
-    entrypoint: "java -jar -Dspring.profiles.active=${ACTIVE_BROKER_TYPE} task-1.0.jar"
+      - "8080:8080"
+      - "5005:5005"
+    entrypoint: "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar -Dspring.profiles.active=${ACTIVE_BROKER_TYPE} task-1.0.jar"
     depends_on:
       - db
       - ${ACTIVE_SERVICE}

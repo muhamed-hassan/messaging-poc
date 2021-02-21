@@ -13,9 +13,9 @@ import reactor.core.publisher.Mono;
 @Service
 public class EventServiceImpl implements EventService {
 
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    private EventProducer eventProducer;
+    private final EventProducer eventProducer;
 
     public EventServiceImpl(EventRepository eventRepository, EventProducer eventProducer) {
         this.eventRepository = eventRepository;
