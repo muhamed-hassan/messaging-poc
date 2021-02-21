@@ -12,16 +12,16 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class BaseEventCommand {
 
-    @NotNull @NotBlank
+    @NotBlank
     private String title;
 
-    @NotNull @NotBlank
+    @NotBlank
     private String place;
 
-    @NotNull @NotBlank
+    @NotBlank
     private String speaker;
 
-    @NotNull @NotBlank
+    @NotBlank
     private String eventType;
 
     @NotNull

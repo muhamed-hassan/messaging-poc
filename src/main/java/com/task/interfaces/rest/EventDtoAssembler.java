@@ -9,11 +9,11 @@ public class EventDtoAssembler {
 
     public EventDTO toDto(Event event) {
         return new EventDTO(event.getId(),
-                                event.getTitle(),
-                                event.getPlace(),
-                                event.getSpeaker(),
-                                event.getEventType(),
-                                event.getDateTime());
+                             event.getTitle(),
+                             event.getPlace(),
+                             event.getSpeaker(),
+                             event.getEventType(),
+                             event.getDateTime());
     }
 
 }

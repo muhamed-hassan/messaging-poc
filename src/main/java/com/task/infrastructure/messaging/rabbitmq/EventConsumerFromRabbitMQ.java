@@ -11,6 +11,8 @@ import com.task.infrastructure.messaging.EventEntityAssembler;
 import com.task.interfaces.rest.EventCreationCommand;
 import com.task.interfaces.rest.EventUpdateCommand;
 
+import reactor.core.scheduler.Schedulers;
+
 @Component
 @Profile("rabbitmq")
 public class EventConsumerFromRabbitMQ implements EventConsumer {
@@ -28,21 +30,27 @@ public class EventConsumerFromRabbitMQ implements EventConsumer {
     @Transactional
     @Override
     public void onCreateEvent(EventCreationCommand eventCreationCommand) {
-        eventRepository.save(eventEntityAssembler.toEntity(eventCreationCommand));
+        eventRepository.save(eventEntityAssembler.toEntity(eventCreationCommand))
+                       .subscribeOn(Schedulers.single())
+                       .subscribe();
     }
 
     @RabbitListener(queues = "${events_to_be_updated}")
     @Transactional
     @Override
     public void onUpdateEvent(EventUpdateCommand eventUpdateCommand) {
-        eventRepository.save(eventEntityAssembler.toEntity(eventUpdateCommand));
+        eventRepository.save(eventEntityAssembler.toEntity(eventUpdateCommand))
+                       .subscribeOn(Schedulers.single())
+                       .subscribe();
     }
 
     @RabbitListener(queues = "${events_to_be_deleted}")
     @Transactional
     @Override
     public void onDeleteEvent(String eventId) {
-        eventRepository.deleteById(eventId);
+        eventRepository.deleteById(eventId)
+                       .subscribeOn(Schedulers.single())
+                       .subscribe();
     }
 
 }
