@@ -1,7 +1,5 @@
 package com.task.application;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.task.domain.Event;
@@ -9,12 +7,15 @@ import com.task.domain.EventRepository;
 import com.task.interfaces.rest.EventCreationCommand;
 import com.task.interfaces.rest.EventUpdateCommand;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 @Service
 public class EventServiceImpl implements EventService {
 
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    private EventProducer eventProducer;
+    private final EventProducer eventProducer;
 
     public EventServiceImpl(EventRepository eventRepository, EventProducer eventProducer) {
         this.eventRepository = eventRepository;
@@ -37,27 +38,21 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getEvent(String eventId) {
+    public Mono<Event> getEvent(String eventId) {
         return eventRepository.findById(eventId)
-                                .orElseThrow(EntityNotFoundException::new);
+                              .switchIfEmpty(Mono.error(new EntityNotFoundException()));
     }
 
     @Override
-    public List<Event> getAllEvents() {
-        var events = eventRepository.findAll();
-        if (events.isEmpty()) {
-            throw new NoResultException();
-        }
-        return events;
+    public Flux<Event> getAllEvents() {
+        return eventRepository.findAll()
+                              .switchIfEmpty(Mono.error(new NoResultException()));
     }
 
     @Override
-    public List<Event> getAllEventsByTitle(String title) {
-        var events = eventRepository.findByTitle(title);
-        if (events.isEmpty()) {
-            throw new NoResultException();
-        }
-        return events;
+    public Flux<Event> getAllEventsByTitle(String title) {
+        return  eventRepository.findByTitle(title)
+                               .switchIfEmpty(Mono.error(new NoResultException()));
     }
 
 }

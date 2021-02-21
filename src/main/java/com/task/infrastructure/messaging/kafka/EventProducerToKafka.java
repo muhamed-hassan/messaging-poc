@@ -13,7 +13,7 @@ import com.task.interfaces.rest.EventUpdateCommand;
 @Profile("kafka")
 public class EventProducerToKafka implements EventProducer {
 
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Value("${events_to_be_created}")
     private String creatingTopic;

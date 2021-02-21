@@ -1,4 +1,4 @@
-package com.task.infrastructure.messaging.configs;
+package com.task.infrastructure;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

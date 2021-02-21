@@ -1,10 +1,11 @@
 package com.task.application;
 
-import java.util.List;
-
 import com.task.domain.Event;
 import com.task.interfaces.rest.EventCreationCommand;
 import com.task.interfaces.rest.EventUpdateCommand;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface EventService {
 
@@ -14,10 +15,10 @@ public interface EventService {
 
     void deleteEvent(String eventId);
 
-    Event getEvent(String eventId);
+    Mono<Event> getEvent(String eventId);
 
-    List<Event> getAllEvents();
+    Flux<Event> getAllEvents();
 
-    List<Event> getAllEventsByTitle(String title);
+    Flux<Event> getAllEventsByTitle(String title);
 
 }

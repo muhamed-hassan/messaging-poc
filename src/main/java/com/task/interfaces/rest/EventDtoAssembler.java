@@ -8,12 +8,14 @@ import com.task.domain.Event;
 public class EventDtoAssembler {
 
     public EventDTO toDto(Event event) {
-        return new EventDTO(event.getId(),
-                                event.getTitle(),
-                                event.getPlace(),
-                                event.getSpeaker(),
-                                event.getEventType(),
-                                event.getDateTime());
+        return new EventDTO.Builder()
+                                .id(event.getId())
+                                .title(event.getTitle())
+                                .place(event.getPlace())
+                                .speaker(event.getSpeaker())
+                                .eventType(event.getEventType())
+                                .dateTime(event.getDateTime())
+                            .build();
     }
 
 }

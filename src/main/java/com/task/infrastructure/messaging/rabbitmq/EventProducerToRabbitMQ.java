@@ -13,7 +13,7 @@ import com.task.interfaces.rest.EventUpdateCommand;
 @Profile("rabbitmq")
 public class EventProducerToRabbitMQ implements EventProducer {
 
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     @Value("${events_to_be_created}")
     private String creatingQueue;

@@ -1,11 +1,10 @@
 package com.task.interfaces.rest;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class EventUpdateCommand extends BaseEventCommand {
 
-    @NotNull @NotBlank
+    @NotBlank(message = "id is required")
     private String id;
 
     public EventUpdateCommand() {}

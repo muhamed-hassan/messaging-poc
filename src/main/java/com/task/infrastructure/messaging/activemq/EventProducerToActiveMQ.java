@@ -13,7 +13,7 @@ import com.task.interfaces.rest.EventUpdateCommand;
 @Profile("activemq")
 public class EventProducerToActiveMQ implements EventProducer {
 
-    private JmsTemplate jmsTemplate;
+    private final JmsTemplate jmsTemplate;
 
     @Value("${events_to_be_created}")
     private String creatingQueue;
