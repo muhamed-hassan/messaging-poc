@@ -95,7 +95,7 @@ public class EventController {
         @ApiResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = "Data not found"),
         @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal server error")
     })
-    @GetMapping(params = "title")
+    @GetMapping(path = "search", params = "title")
     public ResponseEntity<Flux<EventDTO>> getAllEventsByTitle(@RequestParam @NotBlank(message = "title is required") String title) {
         return ResponseEntity.ok(eventService.getAllEventsByTitle(title).map(eventDtoAssembler::toDto));
     }
