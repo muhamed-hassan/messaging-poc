@@ -1,4 +1,4 @@
-package com.task.interfaces.rest;
+package com.task.interfaces.rest.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.task.application.EventService;
+import com.task.domain.EventService;
+import com.task.interfaces.rest.models.EventCreationCommand;
+import com.task.interfaces.rest.models.EventDTO;
+import com.task.interfaces.rest.models.EventDtoAssembler;
+import com.task.interfaces.rest.models.EventUpdateCommand;
 
 @RequestMapping("events")
 @RestController

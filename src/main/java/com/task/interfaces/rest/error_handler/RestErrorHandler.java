@@ -1,4 +1,4 @@
-package com.task.interfaces.rest;
+package com.task.interfaces.rest.error_handler;
 
 import java.util.Collections;
 import java.util.Map;

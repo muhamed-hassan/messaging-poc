@@ -1,4 +1,4 @@
-package com.task.domain;
+package com.task.persistence.entities;
 
 import java.time.LocalDateTime;
 

@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.task.application.EventConsumer;
-import com.task.domain.EventRepository;
+import com.task.infrastructure.messaging.EventConsumer;
 import com.task.infrastructure.messaging.EventEntityAssembler;
-import com.task.interfaces.rest.EventCreationCommand;
-import com.task.interfaces.rest.EventUpdateCommand;
+import com.task.interfaces.rest.models.EventCreationCommand;
+import com.task.interfaces.rest.models.EventUpdateCommand;
+import com.task.persistence.repositories.EventRepository;
 
 @Component
 @Profile("rabbitmq")

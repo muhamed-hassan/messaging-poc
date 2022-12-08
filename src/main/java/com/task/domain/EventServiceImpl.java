@@ -1,13 +1,14 @@
-package com.task.application;
+package com.task.domain;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.task.domain.Event;
-import com.task.domain.EventRepository;
-import com.task.interfaces.rest.EventCreationCommand;
-import com.task.interfaces.rest.EventUpdateCommand;
+import com.task.infrastructure.messaging.EventProducer;
+import com.task.interfaces.rest.models.EventCreationCommand;
+import com.task.interfaces.rest.models.EventUpdateCommand;
+import com.task.persistence.entities.Event;
+import com.task.persistence.repositories.EventRepository;
 
 @Service
 public class EventServiceImpl implements EventService {

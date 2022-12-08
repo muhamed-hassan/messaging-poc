@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.task.application.EventProducer;
-import com.task.interfaces.rest.EventCreationCommand;
-import com.task.interfaces.rest.EventUpdateCommand;
+import com.task.infrastructure.messaging.EventProducer;
+import com.task.interfaces.rest.models.EventCreationCommand;
+import com.task.interfaces.rest.models.EventUpdateCommand;
 
 @Component
 @Profile("rabbitmq")

@@ -2,9 +2,9 @@ package com.task.infrastructure.messaging;
 
 import org.springframework.stereotype.Component;
 
-import com.task.domain.Event;
-import com.task.interfaces.rest.EventCreationCommand;
-import com.task.interfaces.rest.EventUpdateCommand;
+import com.task.interfaces.rest.models.EventCreationCommand;
+import com.task.interfaces.rest.models.EventUpdateCommand;
+import com.task.persistence.entities.Event;
 
 @Component
 public class EventEntityAssembler {

@@ -1,7 +1,7 @@
-package com.task.application;
+package com.task.infrastructure.messaging;
 
-import com.task.interfaces.rest.EventCreationCommand;
-import com.task.interfaces.rest.EventUpdateCommand;
+import com.task.interfaces.rest.models.EventCreationCommand;
+import com.task.interfaces.rest.models.EventUpdateCommand;
 
 public interface EventConsumer {
 

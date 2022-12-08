@@ -1,4 +1,4 @@
-package com.task.interfaces.rest;
+package com.task.interfaces.rest.models;
 
 import java.time.LocalDateTime;
 
