@@ -1,0 +1,5 @@
+spring:
+  activemq:
+    broker: 'tcp://custom-activemq-broker:61616'
+    user: 'admin'
+    password: 'admin'

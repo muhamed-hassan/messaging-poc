@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: 'messaging-poc'
+  data:
+    mongodb:
+	  authentication-database: 'admin'
+	  username: 'root'
+	  password: 'root'
+	  host: 'db'
+	  port: '27017'
+	  database: 'events_db'
+  jackson:
+    serialization:
+      write_dates_as_timestamps: 'false'
+
+# destination: topics or queues
+events_to_be_created: 'events_to_be_created'				
+events_to_be_updated: 'events_to_be_updated'
+events_to_be_deleted: 'events_to_be_deleted'
+

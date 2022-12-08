@@ -14,7 +14,7 @@ public class ErrorLoggerAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ErrorLoggerAspect.class);
 
-    @AfterThrowing(pointcut = "within(com.task.application.*) || within(com.task.infrastructure.messaging.*)", throwing= "exception")
+    @AfterThrowing(pointcut = "within(com.task.domain.*) || within(com.task.infrastructure.messaging.*)", throwing= "exception")
     public void logExceptionMessage(JoinPoint joinPoint, Exception exception) {
         LOGGER.error(">> Error occurred in {}, with message: {}",
                         joinPoint.getSignature().toLongString(),
