@@ -1,14 +1,13 @@
 package com.task.application;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.task.domain.Event;
 import com.task.domain.EventRepository;
 import com.task.interfaces.rest.EventCreationCommand;
 import com.task.interfaces.rest.EventUpdateCommand;
-
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -38,21 +37,19 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Mono<Event> getEvent(String eventId) {
-        return eventRepository.findById(eventId)
-                              .switchIfEmpty(Mono.error(new EntityNotFoundException()));
+    public Event getEvent(String eventId) {    	
+    	return eventRepository.findById(eventId)
+    			.orElseThrow(() -> new RuntimeException("This event with id " + eventId + " does not exist"));
     }
 
     @Override
-    public Flux<Event> getAllEvents() {
-        return eventRepository.findAll()
-                              .switchIfEmpty(Mono.error(new NoResultException()));
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
     @Override
-    public Flux<Event> getAllEventsByTitle(String title) {
-        return  eventRepository.findByTitle(title)
-                               .switchIfEmpty(Mono.error(new NoResultException()));
+    public List<Event> getAllEventsByTitle(String title) {
+        return eventRepository.findByTitle(title);
     }
 
 }

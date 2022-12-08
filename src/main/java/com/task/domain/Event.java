@@ -1,7 +1,6 @@
 package com.task.domain;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,8 +20,6 @@ public class Event {
     private String eventType;
 
     private LocalDateTime dateTime;
-
-    public Event() {}
 
     public String getId() {
         return id;
@@ -72,24 +69,29 @@ public class Event {
         this.dateTime = dateTime;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (this == other)
-            return true;
-        if (!(other instanceof Event))
-            return false;
-        Event that = (Event) other;
-        return Objects.equals(id, that.id) &&
-            Objects.equals(title, that.title) &&
-            Objects.equals(place, that.place) &&
-            Objects.equals(speaker, that.speaker) &&
-            Objects.equals(eventType, that.eventType) &&
-            Objects.equals(dateTime, that.dateTime);
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, place, speaker, eventType, dateTime);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
 }

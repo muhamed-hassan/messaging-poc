@@ -10,8 +10,6 @@ import com.task.infrastructure.messaging.EventEntityAssembler;
 import com.task.interfaces.rest.EventCreationCommand;
 import com.task.interfaces.rest.EventUpdateCommand;
 
-import reactor.core.scheduler.Schedulers;
-
 @Component
 @Profile("activemq")
 public class EventConsumerFromActiveMQ implements EventConsumer {
@@ -28,25 +26,19 @@ public class EventConsumerFromActiveMQ implements EventConsumer {
     @JmsListener(destination = "${events_to_be_created}", containerFactory = "jmsListenerContainerFactory")
     @Override
     public void onCreateEvent(EventCreationCommand eventCreationCommand) {
-        eventRepository.save(eventEntityAssembler.toEntity(eventCreationCommand))
-                       .subscribeOn(Schedulers.single())
-                       .subscribe();
+        eventRepository.save(eventEntityAssembler.toEntity(eventCreationCommand));
     }
 
     @JmsListener(destination = "${events_to_be_updated}", containerFactory = "jmsListenerContainerFactory")
     @Override
     public void onUpdateEvent(EventUpdateCommand eventUpdateCommand) {
-        eventRepository.save(eventEntityAssembler.toEntity(eventUpdateCommand))
-                       .subscribeOn(Schedulers.single())
-                       .subscribe();
+        eventRepository.save(eventEntityAssembler.toEntity(eventUpdateCommand));
     }
 
     @JmsListener(destination = "${events_to_be_deleted}", containerFactory = "jmsListenerContainerFactory")
     @Override
     public void onDeleteEvent(String eventId) {
-        eventRepository.deleteById(eventId)
-                       .subscribeOn(Schedulers.single())
-                       .subscribe();
+        eventRepository.deleteById(eventId);
     }
 
 }

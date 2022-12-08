@@ -1,13 +1,13 @@
 package com.task.domain;
 
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import java.util.List;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import reactor.core.publisher.Flux;
-
 @Repository
-public interface EventRepository extends ReactiveMongoRepository<Event, String> {
+public interface EventRepository extends MongoRepository<Event, String> {
 
-    Flux<Event> findByTitle(String title);
+    List<Event> findByTitle(String title);
 
 }

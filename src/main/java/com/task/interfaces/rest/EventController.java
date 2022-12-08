@@ -1,5 +1,8 @@
 package com.task.interfaces.rest;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
@@ -16,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.task.application.EventService;
-
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @RequestMapping("events")
 @RestController
@@ -53,18 +53,27 @@ public class EventController {
     }
 
     @GetMapping("{eventId}")
-    public ResponseEntity<Mono<EventDTO>> getEvent(@PathVariable @NotBlank(message = "event id is required") String eventId) {
-        return ResponseEntity.ok(eventService.getEvent(eventId).map(eventDtoAssembler::toDto));
+    public ResponseEntity<EventDTO> getEvent(@PathVariable @NotBlank(message = "event id is required") String eventId) {
+    	var response = eventDtoAssembler.toDto(eventService.getEvent(eventId));
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public ResponseEntity<Flux<EventDTO>> getAllEvents() {
-        return ResponseEntity.ok(eventService.getAllEvents().map(eventDtoAssembler::toDto));
+    public ResponseEntity<List<EventDTO>> getAllEvents() {
+    	var response = eventService.getAllEvents()
+    			.stream()
+    			.map(eventDtoAssembler::toDto)
+    			.collect(Collectors.toList());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "search", params = "title")
-    public ResponseEntity<Flux<EventDTO>> getAllEventsByTitle(@RequestParam @NotBlank(message = "title is required") String title) {
-        return ResponseEntity.ok(eventService.getAllEventsByTitle(title).map(eventDtoAssembler::toDto));
+    public ResponseEntity<List<EventDTO>> getAllEventsByTitle(@RequestParam @NotBlank(message = "title is required") String title) {
+    	var response = eventService.getAllEventsByTitle(title)
+    			.stream()
+    			.map(eventDtoAssembler::toDto)
+    			.collect(Collectors.toList());
+        return ResponseEntity.ok(response);
     }
 
 }
