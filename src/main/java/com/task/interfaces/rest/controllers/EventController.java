@@ -58,26 +58,26 @@ public class EventController {
 
     @GetMapping("{eventId}")
     public ResponseEntity<EventDTO> getEvent(@PathVariable @NotBlank(message = "event id is required") String eventId) {
-    	var response = eventDtoAssembler.toDto(eventService.getEvent(eventId));
-        return ResponseEntity.ok(response);
+    	var responseBody = eventDtoAssembler.toDto(eventService.getEvent(eventId));
+        return ResponseEntity.ok(responseBody);
     }
 
     @GetMapping
     public ResponseEntity<List<EventDTO>> getAllEvents() {
-    	var response = eventService.getAllEvents()
+    	var responseBody = eventService.getAllEvents()
     			.stream()
     			.map(eventDtoAssembler::toDto)
     			.collect(Collectors.toList());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(responseBody);
     }
 
     @GetMapping(path = "search", params = "title")
     public ResponseEntity<List<EventDTO>> getAllEventsByTitle(@RequestParam @NotBlank(message = "title is required") String title) {
-    	var response = eventService.getAllEventsByTitle(title)
+    	var responseBody = eventService.getAllEventsByTitle(title)
     			.stream()
     			.map(eventDtoAssembler::toDto)
     			.collect(Collectors.toList());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(responseBody);
     }
 
 }
