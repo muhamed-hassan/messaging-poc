@@ -1,4 +1,5 @@
 target/
+activemq-data/
 
 ### STS ###
 .apt_generated
