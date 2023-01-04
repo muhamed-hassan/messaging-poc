@@ -1,3 +1,0 @@
-spring:
-  rabbitmq:
-    addresses: 'amqp://guest:guest@custom-rabbitmq-broker:5672'
