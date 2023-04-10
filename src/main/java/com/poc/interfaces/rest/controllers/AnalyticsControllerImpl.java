@@ -1,6 +1,5 @@
 package com.poc.interfaces.rest.controllers;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +22,15 @@ public class AnalyticsControllerImpl implements AnalyticsController {
 	
 	@Autowired
 	private AnalyticsService analyticsService;
+	
+	@Autowired
+	private Validator validator; 
 
 	@RequestMapping(value = "cash-out-report", method = RequestMethod.POST)
 	@Override
 	public ResponseEntity<Object> prepareReportRequest(@RequestBody CashOutReportRequest cashOutReportRequest) {
 		
-		String errorMessage = validate(cashOutReportRequest);
+		String errorMessage = validator.validate(cashOutReportRequest);
 		if (errorMessage != null) {			
 			Map<String, String> error = new HashMap<String, String>(1);
 			error.put("error", errorMessage);			
@@ -54,7 +56,7 @@ public class AnalyticsControllerImpl implements AnalyticsController {
 	@RequestMapping(value = "cash-out-report/{year}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getCashOutReport(@PathVariable int year) {
 
-		String errorMessage = validate(year);
+		String errorMessage = validator.validate(year);
 		if (errorMessage != null) {			
 			Map<String, String> error = new HashMap<String, String>(1);
 			error.put("error", errorMessage);			
@@ -80,43 +82,6 @@ public class AnalyticsControllerImpl implements AnalyticsController {
 	 * Suggested Reference: 
      * https://en.wikipedia.org/wiki/Function_overloading 
 	 * 
-	 */
-	
-	/* ******************************************************************************************************** */
-	/* ******************************************************************************************************** */	
-	// https://en.wikipedia.org/wiki/Fail-fast approach is used to report validation errors
-	
-	private String validate(CashOutReportRequest cashOutReportRequest) {
-		
-		// validate "cashOutReportRequest.year range [(currentYear - 5), currentYear] only 5 years backwards is allowed"
-		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		if (cashOutReportRequest.getYear() > currentYear || cashOutReportRequest.getYear() < (currentYear - 5)) {
-			return "only 5 years backwards is allowed";
-		}
-			
-		return null;
-	}
-	
-	private String validate(int year) {
-		
-		// validate "year range [(currentYear - 5), currentYear] only 5 years backwards is allowed"
-		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		if (year > currentYear || year < (currentYear - 5)) {
-			return "only 5 years backwards is allowed";
-		}
-			
-		return null;
-	}
-	
-	/*
-	 * ..
-	 * validate(argX_1 .. argX_N)
-	 * validate(argY_1 .. argY_N)
-	 * validate(argZ_1 .. argZ_N)
-	 * 
-	 * Suggested Reference: 
-     * https://en.wikipedia.org/wiki/Function_overloading
-     *  
 	 */
 	
 }
