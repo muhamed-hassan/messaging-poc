@@ -1,7 +1,4 @@
-package com.poc.interfaces.rest.controllers;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.poc.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poc.domain.AnalyticsService;
-import com.poc.interfaces.rest.models.CashOutReport;
-import com.poc.interfaces.rest.models.CashOutReportRequest;
+import com.poc.web.models.CashOutReport;
+import com.poc.web.models.CashOutReportRequest;
 
 @RequestMapping("v1/analytics")
 @RestController
@@ -30,12 +27,7 @@ public class AnalyticsControllerImpl implements AnalyticsController {
 	@Override
 	public ResponseEntity<Object> prepareReportRequest(@RequestBody CashOutReportRequest cashOutReportRequest) {
 		
-		String errorMessage = validator.validate(cashOutReportRequest);
-		if (errorMessage != null) {			
-			Map<String, String> error = new HashMap<String, String>(1);
-			error.put("error", errorMessage);			
-			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
-		}
+		validator.validate(cashOutReportRequest);
 		
 		analyticsService.prepareReportRequest(cashOutReportRequest);
 		
@@ -56,19 +48,9 @@ public class AnalyticsControllerImpl implements AnalyticsController {
 	@RequestMapping(value = "cash-out-report/{year}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getCashOutReport(@PathVariable int year) {
 
-		String errorMessage = validator.validate(year);
-		if (errorMessage != null) {			
-			Map<String, String> error = new HashMap<String, String>(1);
-			error.put("error", errorMessage);			
-			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
-		}
+		validator.validate(year);
 				
 		CashOutReport responseBody = analyticsService.getCashOutReport(year);
-		if (responseBody == null) {
-			Map<String, String> warning = new HashMap<String, String>(1);
-			warning.put("warning", "cash-out report not found, just try at another time ...");			
-			return new ResponseEntity<Object>(warning, HttpStatus.NOT_FOUND);
-		}
 		
 		return new ResponseEntity<Object>(responseBody, HttpStatus.OK);
 	}

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 
-import com.poc.domain.messaging.CashOutReportPreparer;
+import com.poc.domain.messaging.consumers.CashOutReportPreparer;
 
 @Configuration
 public class JmsConfig {

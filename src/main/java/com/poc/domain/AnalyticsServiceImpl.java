@@ -7,10 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.poc.domain.messaging.AnalyticsProducer;
-import com.poc.interfaces.rest.models.CashOutReport;
-import com.poc.interfaces.rest.models.CashOutReportRequest;
-import com.poc.interfaces.rest.models.MonthlySpending;
+import com.poc.web.error_handler.exceptions.InCompleteCashOutReportException;
+import com.poc.web.models.CashOutReport;
+import com.poc.web.models.CashOutReportRequest;
+import com.poc.web.models.MonthlySpending;
+import com.poc.domain.messaging.producers.AnalyticsProducer;
 import com.poc.persistence.repositories.CashOutReportRepository;
 
 /*
@@ -63,7 +64,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 		com.poc.persistence.entities.CashOutReport cashOutReport = cashOutReportRepository.findByYear(year);
 		
 		if (cashOutReport == null) {
-			return null;
+			throw new InCompleteCashOutReportException();
 		}
 		
 		CashOutReport cashOutReportModel = new CashOutReport();

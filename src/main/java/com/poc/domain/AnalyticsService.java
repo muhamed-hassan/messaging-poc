@@ -1,7 +1,7 @@
 package com.poc.domain;
 
-import com.poc.interfaces.rest.models.CashOutReport;
-import com.poc.interfaces.rest.models.CashOutReportRequest;
+import com.poc.web.models.CashOutReport;
+import com.poc.web.models.CashOutReportRequest;
 
 public interface AnalyticsService {
 	

@@ -1,22 +1,17 @@
-package com.poc.domain.messaging;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.ObjectMessage;
-import javax.jms.Session;
+package com.poc.domain.messaging.producers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
-import com.poc.interfaces.rest.models.CashOutReportRequest;
+import com.poc.domain.messaging.MessageProducer;
 import com.poc.persistence.entities.CashOutReport;
 import com.poc.persistence.repositories.CashOutReportRepository;
+import com.poc.web.models.CashOutReportRequest;
 
 @Component
 public class AnalyticsProducer implements MessageProducer {
-
+	
 	@Autowired
     private JmsTemplate jmsTemplate;
 	
@@ -28,15 +23,8 @@ public class AnalyticsProducer implements MessageProducer {
 		
 		CashOutReport cashOutReport = cashOutReportRepository.findByYear(cashOutReportRequest.getYear());
 		
-		if (cashOutReport == null) {
-			jmsTemplate.send(new MessageCreator() {
-				
-				@Override
-				public Message createMessage(Session session) throws JMSException {
-					ObjectMessage objectMessage = session.createObjectMessage(cashOutReportRequest); 
-					return objectMessage;
-				}
-			});
+		if (cashOutReport == null) {			
+			jmsTemplate.convertAndSend(cashOutReportRequest);
 		}
 	}
 	

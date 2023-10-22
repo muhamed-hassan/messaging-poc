@@ -1,4 +1,4 @@
-package com.poc.domain.messaging;
+package com.poc.domain.messaging.consumers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.jms.ObjectMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.poc.interfaces.rest.models.CashOutReportRequest;
+import com.poc.web.models.CashOutReportRequest;
 import com.poc.persistence.entities.CashOutReport;
 import com.poc.persistence.entities.MonthlySpending;
 import com.poc.persistence.repositories.CashOutReportRepository;

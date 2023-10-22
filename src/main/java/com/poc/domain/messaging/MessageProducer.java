@@ -1,6 +1,6 @@
 package com.poc.domain.messaging;
 
-import com.poc.interfaces.rest.models.CashOutReportRequest;
+import com.poc.web.models.CashOutReportRequest;
 
 public interface MessageProducer {
 

@@ -1,35 +1,31 @@
-package com.poc.interfaces.rest.controllers;
+package com.poc.web.controllers;
 
 import java.util.Calendar;
 
 import org.springframework.stereotype.Component;
 
-import com.poc.interfaces.rest.models.CashOutReportRequest;
+import com.poc.web.models.CashOutReportRequest;
 
 //https://en.wikipedia.org/wiki/Fail-fast approach is used to report validation errors
 @Component
 public class Validator {
 
-	public String validate(CashOutReportRequest cashOutReportRequest) {
+	public void validate(CashOutReportRequest cashOutReportRequest) {
 		
 		// validate "cashOutReportRequest.year range [(currentYear - 5), currentYear] only 5 years backwards is allowed"
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		if (cashOutReportRequest.getYear() > currentYear || cashOutReportRequest.getYear() < (currentYear - 5)) {
-			return "only 5 years backwards is allowed";
+			throw new IllegalArgumentException("only 5 years backwards is allowed");
 		}
-			
-		return null;
 	}
 	
-	public String validate(int year) {
+	public void validate(int year) {
 		
 		// validate "year range [(currentYear - 5), currentYear] only 5 years backwards is allowed"
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		if (year > currentYear || year < (currentYear - 5)) {
-			return "only 5 years backwards is allowed";
+			throw new IllegalArgumentException("only 5 years backwards is allowed");
 		}
-			
-		return null;
 	}
 	
 	/*

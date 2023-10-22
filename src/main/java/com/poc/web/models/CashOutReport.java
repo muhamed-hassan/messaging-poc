@@ -1,4 +1,4 @@
-package com.poc.interfaces.rest.models;
+package com.poc.web.models;
 
 import java.util.List;
 

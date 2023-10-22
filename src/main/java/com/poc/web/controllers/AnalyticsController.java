@@ -1,8 +1,8 @@
-package com.poc.interfaces.rest.controllers;
+package com.poc.web.controllers;
 
 import org.springframework.http.ResponseEntity;
 
-import com.poc.interfaces.rest.models.CashOutReportRequest;
+import com.poc.web.models.CashOutReportRequest;
 
 public interface AnalyticsController {
 
