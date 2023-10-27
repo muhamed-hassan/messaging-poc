@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.poc.domain.AnalyticsService;
 import com.poc.web.models.CashOutReport;
 import com.poc.web.models.CashOutReportRequest;
+import com.poc.web.validators.Validator;
 
 @RequestMapping("v1/analytics")
 @RestController
