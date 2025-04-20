@@ -28,15 +28,4 @@ public class Validator {
 		}
 	}
 	
-	/*
-	 * ..
-	 * validate(argX_1 .. argX_N)
-	 * validate(argY_1 .. argY_N)
-	 * validate(argZ_1 .. argZ_N)
-	 * 
-	 * Suggested Reference: 
-     * https://en.wikipedia.org/wiki/Function_overloading
-     *  
-	 */
-	
 }
