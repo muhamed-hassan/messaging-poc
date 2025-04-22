@@ -1,4 +1,4 @@
-package com.poc.infrastructure.configs;
+package com.poc.infrastructure.configs.messaging;
 
 import javax.jms.ConnectionFactory;
 
