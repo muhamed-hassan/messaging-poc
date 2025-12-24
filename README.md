@@ -1,4 +1,4 @@
-#### Please visit the wiki for more info https://github.com/muhamed-hassan/messaging-poc/wiki
+#### Please visit the [wiki](https://github.com/muhamed-hassan/messaging-poc/wiki) for more info
 
 ***
 
